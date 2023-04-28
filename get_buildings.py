@@ -12,12 +12,13 @@ def get_roofshape(dict):
 def get_df():
     # osm = OSM("bremen.osm.pbf")
     print('loading data')
-    # osm = OSM("bremen-buildings-only.osm.pbf")
-    osm = OSM('data/buildings/bremen-buildings-only.osm.pbf')
+    osm = OSM("bremen.osm.pbf")
+    # osm = OSM('data/buildings/bremen-buildings-only.osm.pbf')
 
     print('get buildings')
     buildings = osm.get_buildings()
     df = pd.DataFrame(buildings)
+    df['roof_shape'] = df.apply(lambda row: get_roofshape('tags'), axis=1)
 
     drop_list = ['addr:country', 'addr:full', 'addr:housename', 'email',
                  'name', 'opening_hours', 'operator', 'phone', 'ref', 'url', 'website', 'internet_access', 'wikipedia']
