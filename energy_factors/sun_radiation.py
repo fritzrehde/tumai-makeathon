@@ -7,7 +7,7 @@ import math
 
 # TODO: maybe add year parameter, as dataset contains yearly data
 
-def get_solar_radiation(latitude, longitude):
+def get_sun_radiation(latitude, longitude):
     # Define coordinate systems
     from_crs = "EPSG:4326"  # WGS 84
     to_crs = "EPSG:31467"  # Gauss Krüger Zone 3
@@ -33,8 +33,3 @@ def get_solar_radiation(latitude, longitude):
     radiance = data[x, y]
 
     return radiance
-
-# Example: Coordinates of TU Munich
-latitude, longitude = 48.1496636, 11.5656715
-radiance = get_solar_radiation(latitude, longitude)
-print(radiance)
