@@ -10,9 +10,8 @@ def get_roofshape(dict):
 
 
 def get_df():
-    # osm = OSM("bremen.osm.pbf")
     print('loading data')
-    osm = OSM("bremen.osm.pbf")
+    osm = OSM("data/buildings/bremen.osm.pbf")
     # osm = OSM('data/buildings/bremen-buildings-only.osm.pbf')
 
     print('get buildings')
