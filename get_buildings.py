@@ -3,10 +3,12 @@ import pandas as pd
 
 
 def get_roofshape(dict):
-    if 'roof:shape' in dict.keys():
+    if isinstance(dict, str):
+        return ""
+    elif 'roof:shape' in dict.keys():
         return dict['roof:shape']
     else:
-        return ("")
+        return ""
 
 
 def get_df():
