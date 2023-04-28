@@ -4,7 +4,7 @@ from energy_factors.sun_radiation import get_sun_radiation
 def run_app():
     st.write("Please provide the location of your house:")
 
-    # TODO: handle long and lat cases outside of germany, which would cause crash
+    # TODO: handle long and lat cases outside of germany, which would cause python crash
     longitude = st.number_input("Longitude", format="%.7f")
     latitude = st.number_input("Latitude", format="%.7f")
 
