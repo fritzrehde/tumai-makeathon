@@ -1,5 +1,5 @@
 # get yearly power
-from energy_factors.sun_radiation import get_sun_radiation
+from .sun_radiation import get_sun_radiation
 
 
 def get_power_basic(latitude, longitude, area):

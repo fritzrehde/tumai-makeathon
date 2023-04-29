@@ -1,35 +1,13 @@
 from pyrosm import OSM
 import pandas as pd
-from get_power import get_power
 import pyproj
 import shapely
 import shapely.wkt
 from shapely.ops import transform
 
-def get_roofshape(dict_):
-    if isinstance(dict_, str):
-        return ""
-    elif 'roof:shape' in dict_.keys():
-        return dict_['roof:shape']
-    else:
-        return ""
-
-# Define the source and destination coordinate systems
-in_proj = pyproj.CRS('EPSG:4326')  # WGS 84
-out_proj = pyproj.CRS('EPSG:3857')  # Web Mercator
-transformer = pyproj.Transformer.from_proj(in_proj, out_proj)
-
-def get_roofarea(polygon):
-    # input polygon is passed directly in the WKT format
-
-    # Convert the polygon string to a Shapely Polygon object
-    # polygon = shapely.wkt.loads(polygon)
-    projected_polygon = shapely.ops.transform(transformer.transform, polygon)
-
-    # Calculate the area of the reprojected polygon in square meters
-    area_m2 = projected_polygon.area
-
-    return area_m2
+from .power import get_power
+from .roof_area import get_roofarea
+from .roof_shape import get_roofshape
 
 def get_df():
     # import .pbf buildings as df
@@ -58,6 +36,3 @@ def get_df():
     print(df.to_csv("test_bremen.csv"))
 
     return df
-
-if __name__ == '__main__':
-    get_df()
