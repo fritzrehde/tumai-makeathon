@@ -5,6 +5,8 @@ from energy_factors.buildings import get_df
 import pandas as pd
 import folium
 from folium.plugins import HeatMap
+from folium import plugins
+from folium.plugins import HeatMap
 
 
 """
@@ -15,7 +17,7 @@ Takes df or csv with buildings and calculates mean power for certain area
 area_border = 1000  # in m
 
 
-def to_GK(lat, long):
+def to_GK_h(lat, long):
     # convert latitude, longitudine to Gauss
     # Define coordinate systems
     from_crs = "EPSG:4326"  # WGS 84
@@ -26,21 +28,38 @@ def to_GK(lat, long):
 
     # Convert latitude and longitude to Gauss Krüger coordinates
     h, r = transformer.transform(lat, long)
-    return h, r
+    return h
 
+def to_GK_r(lat, long):
+    # convert latitude, longitudine to Gauss
+    # Define coordinate systems
+    from_crs = "EPSG:4326"  # WGS 84
+    to_crs = "EPSG:31467"  # Gauss Krüger Zone 3
+
+    # Create transformer object
+    transformer = Transformer.from_crs(from_crs, to_crs)
+
+    # Convert latitude and longitude to Gauss Krüger coordinates
+    h, r = transformer.transform(lat, long)
+    return r
 
 # get df
+print('Get data as df')
 # df = get_df()
 df = pd.read_csv('../generated_data/test_bremen.csv')
 
 # only keep necessary columns
+print('do column magic')
 df['power'] = 1
 df = df[['roof_location_latitude', 'roof_location_longitude', 'power']]
-df.rename(columns={"roof_location_latitude": "latitude", "roof_location_longitude": "longitude"})
+df = df.rename(columns={"roof_location_latitude": "latitude", "roof_location_longitude": "longitude"})
+
 # convert lat, long to meter
+print('converting')
+df['h']= df.apply(lambda x: to_GK_h(x['latitude'], x['longitude']), axis=1)
+df['r']= df.apply(lambda x: to_GK_r(x['latitude'], x['longitude']), axis=1)
 
-df['h'], df['r'] = df['latitude', 'longitude'].apply(to_GK)
-
+print('make boxes')
 h_min = df['h'].min()
 h_max = df['h'].max()
 r_min = df['r'].min()
@@ -58,16 +77,16 @@ for i in range(h_iterations):
     upper = lower + area_border
 
     # select vertical strip in bounds
-    data = df.loc[df['h'] < upper]
-    data = df.loc[data['h'] >= lower]
+    data = df.loc[lambda df: df['h'] < upper]
+    data = df.loc[lambda data: data['h'] >= lower]
 
     for j in range(r_iterations):
         left = area_border*i + r_min
         right = left + area_border
 
         # select horizontal strip in bounds
-        square = data.loc[data['h'] < upper]
-        square = data.loc[square['h'] >= lower]
+        square = data.loc[lambda data: data['h'] < upper]
+        square = data.loc[lambda square:square['h'] >= lower]
 
         mean_power = square["power"].mean()
         mean_lat = square["latitude"].mean()
@@ -80,21 +99,8 @@ for i in range(h_iterations):
 d = {'mean_longitude': long_list, 'mean_latitude': lat_list, 'mean_power': power_list}
 df_reduced = pd.DataFrame(data=d)
 
-map_obj = folium.Map(location = [16, 42], zoom_start = 5)
-
-lats_longs = [
-                [38.27312, -98.5821872, 0.5], # Kansas
-                [34.395342, -111.763275,0.2], # Arizona
-                [37.5726028, -85.1551411, 0.7], # Kentucky
-                [32.3293809, -83.1137366,0.9], # Georgia
-                [40.0796606, -89.4337288,0.1], # Illinois
-            ]
-
-
-HeatMap(lats_longs).add_to(map_obj)
-
-map_obj
-
-
-
-
+heat_df = df_reduced.loc[:,["mean_latitude","mean_longitude","mean_power"]]
+map_hooray = folium.Map(location=[45.517999 ,20.568184 ], zoom_start=12 )
+heat_data = heat_df.values.tolist()
+HeatMap(heat_data,radius=13).add_to(map_hooray)
+map_hooray.save('heat_map.html')
