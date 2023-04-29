@@ -74,14 +74,14 @@ with tab1:
     HeatMap(heat_data, radius=13).add_to(map_hooray)
     folium_static(map_hooray)
     st.caption('Map displaying the potential of solar cells for energy production.')
-    st.text("Solar cells are crucial for reducing Germany's carbon footprint \n and combating climate change."
-            " Germany is one of the world's leading industrial nations and heavily relies \n"
-            "on fossil fuels for energy production. The expansion of solar energy in Germany \n"
-            "has already made significant progress, but there is still a need for further expansion.\n"
-            "Efficient distribution of solar cells is essential to achieving widespread adoption of solar energy\n"
+    st.write("Solar cells are crucial for reducing Germany's carbon footprint and combating climate change. "
+            " Germany is one of the world's leading industrial nations and heavily relies "
+            "on fossil fuels for energy production. The expansion of solar energy in Germany "
+            "has already made significant progress, but there is still a need for further expansion. "
+            "Efficient distribution of solar cells is essential to achieving widespread adoption of solar energy "
             "in the country.\n"
-            "This will help to reduce greenhouse gas emissions, \n"
-            "thereby contributing to a \n cleaner and more sustainable future.\n")
+            "This will help to reduce greenhouse gas emissions, "
+            "thereby contributing to a cleaner and more sustainable future.")
 
 tab2.subheader("A tab with the data")
 
