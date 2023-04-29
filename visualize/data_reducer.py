@@ -32,7 +32,8 @@ def to_GK(lat, long):
 # get df
 df = get_df()
 # only keep necessary columns
-df = df[['latitude', 'longitude', 'power']]
+df = df[['roof_location_latitude', 'roof_location_longitude', 'power']]
+df.rename(columns={"roof_location_latitude": "latitude", "roof_location_longitude": "longitude"})
 # convert lat, long to meter
 
 df['h'], df['r'] = df['latitude', 'longitude'].apply(to_GK)
