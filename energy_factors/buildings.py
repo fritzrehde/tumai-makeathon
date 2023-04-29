@@ -32,5 +32,5 @@ def get_df():
     df['roof_area'] = df['geometry'].apply(get_roofarea)
     df['roof_location_latitude'] = df['geometry'].apply(get_rooflocation_latitude)
     df['roof_location_longitude'] = df['geometry'].apply(get_rooflocation_longitude)
-
+    df['power'] = df.apply(get_power(1, 1, 1), axis=1)
     return df
