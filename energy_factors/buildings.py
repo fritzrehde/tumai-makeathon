@@ -14,7 +14,7 @@ from .roof_shape import get_roofshape
 def get_df():
     # import .pbf buildings as df
     print('loading data')
-    osm = OSM('../data/buildings/bremen.osm.pbf')
+    osm = OSM('data/buildings/bremen.osm.pbf')
 
     print('get buildings')
     buildings = osm.get_buildings()
@@ -32,5 +32,5 @@ def get_df():
     df['roof_area'] = df['geometry'].apply(get_roofarea)
     df['roof_location_latitude'] = df['geometry'].apply(get_rooflocation_latitude)
     df['roof_location_longitude'] = df['geometry'].apply(get_rooflocation_longitude)
-    df['power'] = df.apply(get_power(df['roof_location_latitude'], df['roof_location_longitude'], 1), axis=1)
+    # df['power'] = df.apply(get_power(df['roof_location_latitude'], df['roof_location_longitude'], 1), axis=1)
     return df

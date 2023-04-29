@@ -30,8 +30,11 @@ def to_GK(lat, long):
 
 
 # get df
-df = get_df()
+# df = get_df()
+df = pd.read_csv('../generated_data/test_bremen.csv')
+
 # only keep necessary columns
+df['power'] = 1
 df = df[['roof_location_latitude', 'roof_location_longitude', 'power']]
 df.rename(columns={"roof_location_latitude": "latitude", "roof_location_longitude": "longitude"})
 # convert lat, long to meter
@@ -78,7 +81,6 @@ d = {'mean_longitude': long_list, 'mean_latitude': lat_list, 'mean_power': power
 df_reduced = pd.DataFrame(data=d)
 
 map_obj = folium.Map(location = [16, 42], zoom_start = 5)
-
 
 lats_longs = [
                 [38.27312, -98.5821872, 0.5], # Kansas
