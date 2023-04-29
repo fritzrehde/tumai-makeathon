@@ -5,6 +5,7 @@ import shapely
 import shapely.wkt
 from shapely.ops import transform
 
+from .sun_radiation import get_sun_radiation
 from .power import get_power
 from .roof_area import get_roofarea
 from .roof_location import get_rooflocation_latitude
@@ -36,16 +37,14 @@ def get_df():
     drop_cols = list(set(df.columns) - set(keep_cols))
     df = df.drop(drop_cols, axis=1)
 
-    df = df[df['addr:housenumber'].str.strip().astype(bool)]  # Drop stuff without housenumber
-
     # Add columns custom calculated columns
     print('Debug: Calc area, coordinates, power')
     df['roof_area'] = df['geometry'].apply(get_roofarea)
     df['roof_location_latitude'] = df['geometry'].apply(get_rooflocation_latitude)
     df['roof_location_longitude'] = df['geometry'].apply(get_rooflocation_longitude)
-    # df[['power', 'irradiance']] = get_power(df['roof_location_latitude'], df['roof_location_longitude'], df['roof_area'])
-    result_df = get_power(df['roof_location_latitude'], df['roof_location_longitude'], df['roof_area'])
-    df[['power', 'irradiance']] = result_df[['power', 'irradiance']]
+
+    df['irradiance'] = get_sun_radiation(df['roof_location_latitude'], df['roof_location_longitude'])
+    df['power'] = get_power(df['irradiance'], df['roof_area'])
 
     # Drop columns with unsupported types in tinydb
     print('Debug: Drop Geometry')
