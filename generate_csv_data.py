@@ -5,7 +5,7 @@ def run():
 
     # Export data to csv file
     print("Debug: started writing data-frame to csv file")
-    df.to_csv("generated_data/test_bremen.csv")
+    df.to_csv("generated_data/germany.csv")
     print("Debug: finished writing data-frame to csv file")
 
 if __name__ == '__main__':
