@@ -7,6 +7,8 @@ from shapely.ops import transform
 
 from .power import get_power
 from .roof_area import get_roofarea
+from .roof_location import get_rooflocation_latitude
+from .roof_location import get_rooflocation_longitude
 from .roof_shape import get_roofshape
 
 def get_df():
@@ -28,11 +30,7 @@ def get_df():
     # Add columns with roof area and shape
     # df['roof_shape'] = df['tags'].apply(get_roofshape)
     df['roof_area'] = df['geometry'].apply(get_roofarea)
-
-    # Export
-    print(df.columns)
-    # print(df.loc[100, :].values.tolist())
-    # print(df.head(100).to_csv("test.csv"))
-    print(df.to_csv("test_bremen.csv"))
+    df['roof_location_latitude'] = df['geometry'].apply(get_rooflocation_latitude)
+    df['roof_location_longitude'] = df['geometry'].apply(get_rooflocation_longitude)
 
     return df
