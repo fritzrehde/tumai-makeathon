@@ -16,7 +16,7 @@ from .building_type import get_buildingtype
 def get_df():
     # import .pbf buildings as df
     print('Debug: loading data from OSM')
-    osm = OSM('https://makeathon0835510051.blob.core.windows.net/azureml-blobstore-4f800bf3-3089-4757-9d89-d2a8a7c7b1b6/UI/2023-04-29_191451_UTC/germany-latest.osm.pbf')
+    osm = OSM('azureml://subscriptions/7972acb1-114d-41ac-b5c5-91d74b796b31/resourcegroups/paul.pucknus-rg/workspaces/makeathon/datastores/workspaceblobstore/paths/UI/2023-04-29_191451_UTC/germany-latest.osm.pbf')
     # osm = OSM('data/buildings/bremen.osm.pbf')
 
     print('Debug: extract buildings from OSM')
