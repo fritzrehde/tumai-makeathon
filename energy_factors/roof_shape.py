@@ -7,9 +7,7 @@ import shapely.wkt
 from shapely.ops import transform
 
 def get_roofshape(dict_):
-    if isinstance(dict_, str):
-        return ""
-    elif 'roof:shape' in dict_.keys():
-        return dict_['roof:shape']
+    if isinstance(dict_, dict):
+        return "dict_['roof:shape']"
     else:
         return ""

@@ -10,4 +10,4 @@ def get_power_basic(latitude, longitude, area):
 
 def get_power(latitude, longitude, area):
     power = get_power_basic(latitude, longitude, area)
-    return 1
+    return power
