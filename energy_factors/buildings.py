@@ -23,24 +23,27 @@ def get_df():
 
     print('Debug: df cleaning and preparation')
     # Extract stuff that is removed later
+    print('Debug: Get roof shapes')
     df['roof_shape'] = get_roofshape(df['tags'])
     # df['building_type'] = get_buildingtype(df['tags'])
 
     # drop all the columns except the ones specified in keep_cols
-    keep_cols = ['addr:housenumber', 'addr:postcode', 'addr:street', 'building:levels', 'height', 'geometry']
+    print('Debug: Drop Columns')
+    keep_cols = ['addr:housenumber', 'addr:postcode', 'addr:street', 'building:levels', 'height', 'geometry', 'roof:shape']
     drop_cols = list(set(df.columns) - set(keep_cols))
     df = df.drop(drop_cols, axis=1)
 
     df = df[df['addr:housenumber'].str.strip().astype(bool)]  # Drop stuff without housenumber
 
     # Add columns custom calculated columns
+    print('Debug: Calc area, coordinates, power')
     df['roof_area'] = df['geometry'].apply(get_roofarea)
     df['roof_location_latitude'] = df['geometry'].apply(get_rooflocation_latitude)
     df['roof_location_longitude'] = df['geometry'].apply(get_rooflocation_longitude)
-
-    df['power'] = get_power(df['roof_location_latitude'], df['roof_location_longitude'], 1)
+    df['power'], df['irradiance'] = get_power(df['roof_location_latitude'], df['roof_location_longitude'], df['roof_area'])
 
     # Drop columns with unsupported types in tinydb
+    print('Debug: Drop Geometry')
     drop_list = ['geometry']
     df = df.drop(drop_list, axis=1)
 
