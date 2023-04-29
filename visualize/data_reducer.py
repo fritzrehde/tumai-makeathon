@@ -56,7 +56,6 @@ df = df.rename(columns={"roof_location_latitude": "latitude", "roof_location_lon
 
 # convert lat, long to meter
 print('converting h')
-# df['h']= df.apply(lambda x: to_GK_h(x['latitude'], x['longitude']), axis=1)
 df['h'] = to_GK_h(df['latitude'], df['longitude'])
 print('converting r')
 df['r'] = to_GK_r(df['latitude'], df['longitude'])

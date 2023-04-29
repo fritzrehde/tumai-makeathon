@@ -22,7 +22,7 @@ def get_df():
 
     print('Debug: df cleaning and preparation')
     # Extract stuff that is removed later
-    df['roof_shape'] = df['tags'].apply(get_roofshape)
+    df['roof_shape'] = get_roofshape(df['tags'])
 
     # drop all the columns except the ones specified in keep_cols
     keep_cols = ['addr:housenumber', 'addr:postcode', 'addr:street', 'building:levels', 'height', 'geometry']
@@ -36,7 +36,7 @@ def get_df():
     df['roof_location_latitude'] = df['geometry'].apply(get_rooflocation_latitude)
     df['roof_location_longitude'] = df['geometry'].apply(get_rooflocation_longitude)
 
-    df['power'] = df.apply(get_power(df['roof_location_latitude'], df['roof_location_longitude'], 1), axis=1)
+    df['power'] = get_power(df['roof_location_latitude'], df['roof_location_longitude'], 1)
 
     # Drop columns with unsupported types in tinydb
     drop_list = ['geometry']
