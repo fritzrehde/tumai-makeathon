@@ -27,6 +27,9 @@ def get_df():
     df['roof_shape'] = get_roofshape(df['tags'])
     # df['building_type'] = get_buildingtype(df['tags'])
 
+    # drop all rows that don't contain certain columns
+    df = df.dropna(subset=['addr:housenumber', 'addr:postcode', 'addr:street'])
+
     # drop all the columns except the ones specified in keep_cols
     print('Debug: Drop Columns')
     keep_cols = ['addr:housenumber', 'addr:postcode', 'addr:street', 'building:levels', 'height', 'geometry', 'roof:shape']
