@@ -1,5 +1,6 @@
 from pyrosm import OSM
 import pandas as pd
+from get_power import get_power
 
 
 def get_roofshape(dict):
@@ -42,6 +43,7 @@ def get_df():
     # print(df.loc[100, :].values.tolist())
     print(df.head(100).to_csv("test.csv"))
 
+    return df
 
 if __name__ == '__main__':
     get_df()
