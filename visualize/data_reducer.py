@@ -103,7 +103,8 @@ df_reduced = pd.DataFrame(data=d)
 df_reduced.to_csv('reduced_data.csv')
 
 heat_df = df_reduced.loc[:,["mean_latitude","mean_longitude","mean_power"]]
-map_hooray = folium.Map(location=[45.517999 ,20.568184 ], zoom_start=12 )
+
+map_hooray = folium.Map(location=[50, 12], zoom_start=12)
 heat_data = heat_df.values.tolist()
 HeatMap(heat_data,radius=13).add_to(map_hooray)
 map_hooray.save('heat_map.html')
