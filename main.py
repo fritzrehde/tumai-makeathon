@@ -1,6 +1,7 @@
 import streamlit as st
 from geopy.geocoders import Nominatim
 from energy_factors.sun_radiation import get_sun_radiation
+import pandas as pd
 
 # Set up the Streamlit app
 st.title("Solar Opposites")
@@ -26,6 +27,12 @@ if address:
 
         # Calculate potential energy harvested per year
         potential_energy = get_sun_radiation(latitude, longitude) # Use correct function!!
+        
+        # Create a DataFrame with the latitude and longitude information
+        data = pd.DataFrame({"LATITUDE": [latitude], "LONGITUDE": [longitude]})
+
+        # Display map with marker on address
+        st.map(data)
         
         st.write("Your house's total potential energy harvested per year (in kWh/m^2), if you were to install solar panels:", potential_energy)
 

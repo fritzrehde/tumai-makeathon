@@ -26,7 +26,7 @@ def get_sun_radiation(latitude, longitude):
     NODATA_VALUE = -999
 
     # Load data as 2d array
-    data = np.loadtxt("../data/radiation/grids_germany_annual_radiation_global_2022.asc", skiprows=28)
+    data = np.loadtxt("data/radiation/grids_germany_annual_radiation_global_2022.asc", skiprows=28)
     data[data == -999] = np.nan
 
     y, x = math.floor((r - XLLCORNER) / CELLSIZE), NROWS - math.ceil((h - YLLCORNER) / CELLSIZE)
