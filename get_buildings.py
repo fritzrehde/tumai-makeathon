@@ -11,7 +11,14 @@ def get_roofshape(dict):
         return ""
 
 
+def get_roofarea(x):
+    # TODO: Add this
+    # Placeholder Function that takes geometry and turns it to roof area:
+    return 0
+
+
 def get_df():
+    # import .pbf buildings as df
     print('loading data')
     osm = OSM("data/buildings/bremen.osm.pbf")
     # osm = OSM('data/buildings/bremen-buildings-only.osm.pbf')
@@ -19,18 +26,21 @@ def get_df():
     print('get buildings')
     buildings = osm.get_buildings()
     df = pd.DataFrame(buildings)
-    df['roof_shape'] = df.apply(lambda row: get_roofshape('tags'), axis=1)
 
+    # Drop certain columns and rows without streetnumber
     drop_list = ['addr:country', 'addr:full', 'addr:housename', 'email',
                  'name', 'opening_hours', 'operator', 'phone', 'ref', 'url', 'website', 'internet_access', 'wikipedia']
 
     df = df.drop(drop_list, axis=1)
-    print(df.columns)
-    print(df.loc[100, :].values.tolist())
-    print(df.head(100).to_csv("test.csv"))
+    df = df[df['addr:housenumber'].str.strip().astype(bool)]
 
-    # x = get_roofshape({"roof:shape":"flat","type":"supermarket"})
-    # print(x)
+    # Add column with roof area and shape
+    df['roof_shape'] = df.apply(lambda row: get_roofshape('tags'), axis=1)
+    df['roof_area'] = df.apply(lambda row: get_roofarea('geometry'), axis=1)
+
+    print(df.columns)
+    # print(df.loc[100, :].values.tolist())
+    print(df.head(100).to_csv("test.csv"))
 
 
 if __name__ == '__main__':
