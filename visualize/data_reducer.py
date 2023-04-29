@@ -8,7 +8,7 @@ from folium.plugins import HeatMap
 
 
 """
-Takes df with buildings and calculates mean power for certain area
+Takes df or csv with buildings and calculates mean power for certain area
 """
 
 
@@ -32,7 +32,8 @@ def to_GK(lat, long):
 # get df
 df = get_df()
 # only keep necessary columns
-df = df[['latitude', 'longitude', 'power']]
+df = df[['roof_location_latitude', 'roof_location_longitude', 'power']]
+df.rename(columns={"roof_location_latitude": "latitude", "roof_location_longitude": "longitude"})
 # convert lat, long to meter
 
 df['h'], df['r'] = df['latitude', 'longitude'].apply(to_GK)
@@ -76,7 +77,7 @@ for i in range(h_iterations):
 d = {'mean_longitude': long_list, 'mean_latitude': lat_list, 'mean_power': power_list}
 df_reduced = pd.DataFrame(data=d)
 
-map_obj = folium.Map(location = [38.27312, -98.5821872], zoom_start = 5)
+map_obj = folium.Map(location = [16, 42], zoom_start = 5)
 
 
 lats_longs = [
