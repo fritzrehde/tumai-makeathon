@@ -55,9 +55,11 @@ df = df[['roof_location_latitude', 'roof_location_longitude', 'power']]
 df = df.rename(columns={"roof_location_latitude": "latitude", "roof_location_longitude": "longitude"})
 
 # convert lat, long to meter
-print('converting')
-df['h']= df.apply(lambda x: to_GK_h(x['latitude'], x['longitude']), axis=1)
-df['r']= df.apply(lambda x: to_GK_r(x['latitude'], x['longitude']), axis=1)
+print('converting h')
+# df['h']= df.apply(lambda x: to_GK_h(x['latitude'], x['longitude']), axis=1)
+df['h'] = to_GK_h(df['latitude'], df['longitude'])
+print('converting r')
+df['r'] = to_GK_r(df['latitude'], df['longitude'])
 
 print('make boxes')
 h_min = df['h'].min()
@@ -98,6 +100,7 @@ for i in range(h_iterations):
 
 d = {'mean_longitude': long_list, 'mean_latitude': lat_list, 'mean_power': power_list}
 df_reduced = pd.DataFrame(data=d)
+df_reduced.to_csv('reduced_data.csv')
 
 heat_df = df_reduced.loc[:,["mean_latitude","mean_longitude","mean_power"]]
 map_hooray = folium.Map(location=[45.517999 ,20.568184 ], zoom_start=12 )
