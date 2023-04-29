@@ -12,7 +12,7 @@ def get_roofshape(dict):
 
 
 def get_roofarea(x):
-    # TODO: Add this
+    # TODO: Add thus
     # Placeholder Function that takes geometry and turns it to roof area:
     return 0
 
