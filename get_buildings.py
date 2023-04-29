@@ -37,6 +37,7 @@ def get_df():
     df['roof_shape'] = df.apply(lambda row: get_roofshape('tags'), axis=1)
     df['roof_area'] = df.apply(lambda row: get_roofarea('geometry'), axis=1)
 
+    # Export
     print(df.columns)
     # print(df.loc[100, :].values.tolist())
     print(df.head(100).to_csv("test.csv"))
