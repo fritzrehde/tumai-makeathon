@@ -2,6 +2,14 @@ import streamlit as st
 from geopy.geocoders import Nominatim
 from energy_factors.sun_radiation import get_sun_radiation
 import pandas as pd
+import streamlit as st
+from streamlit_folium import folium_static
+import folium
+from folium.plugins import HeatMap
+
+# For area production heatmap
+df_reduced = pd.read_csv('visualize/reduced_data.csv')
+heat_df = df_reduced.loc[:,["mean_latitude","mean_longitude","mean_power"]]
 
 # Set up the Streamlit app
 st.title("Solar Opposites")
@@ -46,3 +54,13 @@ if button:
 
         else:
             st.write("Address not found")
+
+with st.echo():
+    import streamlit as st
+    from streamlit_folium import folium_static
+    import folium
+
+    map_hooray = folium.Map(location=[50, 12], zoom_start=12)
+    heat_data = heat_df.values.tolist()
+    HeatMap(heat_data, radius=13).add_to(map_hooray)
+    folium_static(map_hooray)
