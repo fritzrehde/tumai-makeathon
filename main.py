@@ -7,7 +7,11 @@ import pandas as pd
 st.title("Solar Opposites")
 
 # Get user input
-address = st.text_input("Enter an address")
+street_num = st.text_input("Enter your address")
+zip_code = st.text_input("Enter your zip code")
+
+# Combine street number and zip code to form the complete address
+address = f"{street_num}, Germany, {zip_code}"
 
 # Initialize the geolocator
 geolocator = Nominatim(user_agent="my-app")
