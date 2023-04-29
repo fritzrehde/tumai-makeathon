@@ -9,5 +9,5 @@ def get_power_basic(irradiance, area):
 
 def get_power(latitude, longitude, area):
     irradiance = get_sun_radiation(latitude, longitude)
-    power = get_power_basic(latitude, longitude, area)
+    power = get_power_basic(irradiance, area)
     return power, irradiance

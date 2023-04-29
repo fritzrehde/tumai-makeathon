@@ -29,9 +29,8 @@ def get_sun_radiation(latitude, longitude):
     data = np.loadtxt("data/radiation/grids_germany_annual_radiation_global_2022.asc", skiprows=28)
     data[data == -999] = np.nan
 
-    y, x = np.floor((r - XLLCORNER) / CELLSIZE), NROWS - np.ceil((h - YLLCORNER) / CELLSIZE)
-    print(y)
-    print(x)
-    radiance = data[np.int(x), np.int(y)]
+    y = np.floor((r - XLLCORNER) / CELLSIZE).astype(int)
+    x = (NROWS - np.ceil((h - YLLCORNER) / CELLSIZE)).astype(int)
+    radiance = data[x, y]
 
     return radiance

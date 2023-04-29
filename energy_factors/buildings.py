@@ -40,7 +40,9 @@ def get_df():
     df['roof_area'] = df['geometry'].apply(get_roofarea)
     df['roof_location_latitude'] = df['geometry'].apply(get_rooflocation_latitude)
     df['roof_location_longitude'] = df['geometry'].apply(get_rooflocation_longitude)
-    df['power'], df['irradiance'] = get_power(df['roof_location_latitude'], df['roof_location_longitude'], df['roof_area'])
+    # df[['power', 'irradiance']] = get_power(df['roof_location_latitude'], df['roof_location_longitude'], df['roof_area'])
+    result_df = get_power(df['roof_location_latitude'], df['roof_location_longitude'], df['roof_area'])
+    df[['power', 'irradiance']] = result_df[['power', 'irradiance']]
 
     # Drop columns with unsupported types in tinydb
     print('Debug: Drop Geometry')
