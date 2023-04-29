@@ -14,7 +14,7 @@ from .roof_shape import get_roofshape
 def get_df():
     # import .pbf buildings as df
     print('loading data')
-    osm = OSM('/data/buildings/bremen.osm.pbf')
+    osm = OSM('../data/buildings/bremen.osm.pbf')
 
     print('get buildings')
     buildings = osm.get_buildings()

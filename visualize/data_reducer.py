@@ -30,7 +30,7 @@ def to_GK(lat, long):
 
 
 # get df
-df = get_df()
+df = get_df('../data/buildings/bremen.osm.pbf')
 # only keep necessary columns
 df = df[['latitude', 'longitude', 'power']]
 # convert lat, long to meter
