@@ -1,6 +1,5 @@
 import pandas as pd
 from flask import Flask, jsonify, request, abort
-from tinydb import TinyDB, Query, where
 
 from energy_factors.buildings import get_df
 
