@@ -10,6 +10,7 @@ from .roof_area import get_roofarea
 from .roof_location import get_rooflocation_latitude
 from .roof_location import get_rooflocation_longitude
 from .roof_shape import get_roofshape
+from .building_type import get_buildingtype
 
 def get_df():
     # import .pbf buildings as df
@@ -23,6 +24,7 @@ def get_df():
     print('Debug: df cleaning and preparation')
     # Extract stuff that is removed later
     df['roof_shape'] = get_roofshape(df['tags'])
+    # df['building_type'] = get_buildingtype(df['tags'])
 
     # drop all the columns except the ones specified in keep_cols
     keep_cols = ['addr:housenumber', 'addr:postcode', 'addr:street', 'building:levels', 'height', 'geometry']

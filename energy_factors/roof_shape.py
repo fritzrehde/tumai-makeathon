@@ -8,6 +8,7 @@ from shapely.ops import transform
 
 def get_roofshape(dict_):
     if isinstance(dict_, dict):
-        return "dict_['roof:shape']"
+        shape = dict_.get('roof:shape')
+        return shape
     else:
-        return ""
+        return None
