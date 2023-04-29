@@ -20,8 +20,8 @@ def get_roofarea(x):
 def get_df():
     # import .pbf buildings as df
     print('loading data')
-    osm = OSM("data/buildings/bremen.osm.pbf")
-    # osm = OSM('data/buildings/bremen-buildings-only.osm.pbf')
+    # osm = OSM("data/buildings/bremen.osm.pbf")
+    osm = OSM('data/buildings/germany.osm.pbf')
 
     print('get buildings')
     buildings = osm.get_buildings()
@@ -41,9 +41,11 @@ def get_df():
     # Export
     print(df.columns)
     # print(df.loc[100, :].values.tolist())
-    print(df.head(100).to_csv("test.csv"))
+    # print(df.head(100).to_csv("test.csv"))
+    print(df.to_csv("test_all_germany.csv"))
 
     return df
+
 
 if __name__ == '__main__':
     get_df()
