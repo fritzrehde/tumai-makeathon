@@ -1,35 +1,44 @@
 import streamlit as st
-import streamlit_leaflet as stl
+from geopy.geocoders import Nominatim
 from energy_factors.sun_radiation import get_sun_radiation
+import pandas as pd
 
+# Set up the Streamlit app
+st.title("Solar Opposites")
 
-stl.css()
-stl.js()
+# Get user input
+street_num = st.text_input("Enter your address")
+zip_code = st.text_input("Enter your zip code")
 
-st.header("Select a location on the map")
+# Combine street number and zip code to form the complete address
+address = f"{street_num}, Germany, {zip_code}"
 
-# Set initial map center and zoom level
-initial_location = [52.5200, 13.4050]
-zoom_level = 10
+# Initialize the geolocator
+geolocator = Nominatim(user_agent="my-app")
 
-# Display the map
-map_data = stl.Map(center=initial_location, zoom=zoom_level)
+# Use the geolocator to get the latitude and longitude of the address
+if address:
+    location = geolocator.geocode(address)
+    if location:
+        latitude, longitude = location.latitude, location.longitude
+        st.write("Latitude:", latitude)
+        st.write("Longitude:", longitude)
 
-# Create empty element to display selected location
-location_elem = st.empty()
+        # Check if location is in Germany
+        if not(47.3 <= latitude <= 55.1 and 5.9 <= longitude <= 15.2):
+            st.write("Address is outside of Germany")
+            st.stop()
 
-# Get the user-selected location
-if map_data:
-    location = map_data["click"]
-    location_elem.success(f"Selected location: {location}")
-    longitude, latitude = location_elem.json["click"]
+        # Calculate potential energy harvested per year
+        potential_energy = get_sun_radiation(latitude, longitude) # Use correct function!!
+        
+        # Create a DataFrame with the latitude and longitude information
+        data = pd.DataFrame({"LATITUDE": [latitude], "LONGITUDE": [longitude]})
 
-    # Check if location is within Germany
-    if not (5.87 <= longitude <= 15.04 and 47.28 <= latitude <= 55.06):
-        st.error("The selected location is outside of Germany. Please select a location within Germany.")
+        # Display map with marker on address
+        st.map(data)
+        
+        st.write("Your house's total potential energy harvested per year (in kWh/m^2), if you were to install solar panels:", potential_energy)
+
     else:
-        st.write("Please provide the location of your house:")
-        if st.button('Calculate'):
-            radiance = get_sun_radiation(latitude, longitude)
-            st.write("Your house's total potential energy harvested per year (in kWh/m^2), if you were to install solar panels: ", radiance)
-
+        st.write("Address not found")
