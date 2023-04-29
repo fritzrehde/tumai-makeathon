@@ -16,7 +16,8 @@ from .building_type import get_buildingtype
 def get_df():
     # import .pbf buildings as df
     print('Debug: loading data from OSM')
-    osm = OSM('data/buildings/bremen.osm.pbf')
+    osm = OSM('UI/2023-04-29_191451_UTC/germany-latest.osm.pbf')
+    # osm = OSM('data/buildings/bremen.osm.pbf')
 
     print('Debug: extract buildings from OSM')
     buildings = osm.get_buildings()
