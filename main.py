@@ -7,6 +7,7 @@ from streamlit_folium import folium_static
 import folium
 from folium.plugins import HeatMap
 import requests
+import pydeck as pdk
 
 # For area production heatmap
 df_reduced = pd.read_csv('visualize/reduced_data.csv')
@@ -88,10 +89,42 @@ with tab1:
 with tab2:
     tab2.subheader("A tab with the data")
     df_100 = pd.read_csv('visualize/top_100.csv')
+
+
+    st.pydeck_chart(pdk.Deck(
+        map_style=None,
+        initial_view_state=pdk.ViewState(
+            latitude=37.76,
+            longitude=-122.4,
+            zoom=11,
+            pitch=50,
+        ),
+        layers=[
+            pdk.Layer(
+                'HexagonLayer',
+                data=df_100[['roof_location_latitude', 'roof_location_longitude']],
+                get_position='[lon, lat]',
+                radius=200,
+                elevation_scale=4,
+                elevation_range=[0, 1000],
+                pickable=True,
+                extruded=True,
+            ),
+            pdk.Layer(
+                'ScatterplotLayer',
+                data=df_100[['roof_location_latitude', 'roof_location_longitude']],
+                get_position='[lon, lat]',
+                get_color='[200, 30, 0, 160]',
+                get_radius=200,
+            ),
+        ],
+    ))
+
     keep_cols = ['addr:housenumber', 'addr:postcode', 'addr:street', 'roof_area',
-                'power', 'irradiance']
+                 'power', 'irradiance']
     drop_cols = list(set(df_100.columns) - set(keep_cols))
     df_100 = df_100.drop(drop_cols, axis=1)
-    column_order=['addr:street', 'addr:housenumber', 'addr:postcode', 'roof_area' 'irradiance', 'power']
+    column_order = ['addr:street', 'addr:housenumber', 'addr:postcode', 'roof_area' 'irradiance', 'power']
     df_100 = df_100.reindex(columns=column_order)
     st.dataframe(df_100, 800, 400)
+

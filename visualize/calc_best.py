@@ -5,7 +5,7 @@ def get_stuff():
     df = df.sort_values(by=['power'])
 
     keep_cols = ['addr:housenumber', 'addr:postcode', 'addr:street', 'roof_area',
-                 'power', 'irradiance']
+                 'power', 'irradiance', 'roof_location_latitude', 'roof_location_longitude']
     drop_cols = list(set(df.columns) - set(keep_cols))
     df = df.drop(drop_cols, axis=1)
 
