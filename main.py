@@ -80,7 +80,7 @@ with st.sidebar:
 tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"])
 
 with tab1:
-    tab1.subheader("A tab with a chart")
+    tab1.subheader("Solar Oppurtunities in Germany")
     map_hooray = folium.Map(location=[51, 10], zoom_start=6.05)
     heat_data = heat_df.values.tolist()
     HeatMap(heat_data, radius=13).add_to(map_hooray)
@@ -96,31 +96,12 @@ with tab1:
             "thereby contributing to a cleaner and more sustainable future.")
 
 with tab2:
-    tab2.subheader("A tab with the data")
+    tab2.subheader("Highest potential Buildings and why it matters")
     df_100 = pd.read_csv('visualize/top_100.csv')
+    df_100 = df_100.rename(columns={'roof_location_latitude': 'lat', 'roof_location_longitude': 'lon'})
+    # df_map = df_100[['roof_location_latitude', 'roof_location_longitude', 'power']]
 
-    df_map = df_100[['roof_location_latitude', 'roof_location_longitude', 'power']]
-    df_map = df_map.rename(columns={'roof_location_latitude':'lat', 'roof_location_longitude':'lon', 'power':'weight'})
-
-    # create a Folium map
-    m = folium.Map(location=[51.509865, -0.118092], zoom_start=13)
-
-    # add a heatmap layer to the map
-    folium.plugins.HeatMap(
-        data=df_map[['lat', 'lon', 'weight']].values.tolist(),
-        name='Heat Map',
-        min_opacity=0.2,
-        max_val=float(df_map['weight'].max()),
-        radius=15,
-        blur=10,
-        max_zoom=1,
-    ).add_to(m)
-
-    # add a legend to the map
-    folium.LayerControl().add_to(m)
-
-    # display the map in Streamlit
-    st.markdown(m._repr_html_(), unsafe_allow_html=True)
+    st.map(df_100[['lat', 'lon', 'power']])
 
     keep_cols = ['addr:housenumber', 'addr:postcode', 'addr:street', 'roof_area',
                  'power', 'irradiance']
