@@ -15,7 +15,7 @@ from .building_type import get_buildingtype
 
 from azureml.fsspec import AzureMachineLearningFileSystem
 
-fs = AzureMachineLearningFileSystem('azureml://subscriptions/7972acb1-114d-41ac-b5c5-91d74b796b31/resourcegroups/paul.pucknus-rg/workspaces/makeathon/datastores/workspaceblobstore')
+fs = AzureMachineLearningFileSystem('azureml://subscriptions/7972acb1-114d-41ac-b5c5-91d74b796b31/resourcegroups/paul.pucknus-rg/workspaces/makeathon/datastores/workspaceblobstore/UI')
 uri = 'azureml://subscriptions/7972acb1-114d-41ac-b5c5-91d74b796b31/resourcegroups/paul.pucknus-rg/workspaces/makeathon/datastores/workspaceblobstore/paths/UI/2023-04-29_191451_UTC/germany-latest.osm.pbf'
 def get_df():
     # import .pbf buildings as df
