@@ -18,7 +18,7 @@ heat_df = df_reduced.loc[:,["mean_latitude","mean_longitude","mean_power"]]
 st.title("Solar Opposites")
 
 with st.sidebar:
-    st.title("Userstuff")
+    st.title("Get your Solar benefits")
     # Get user input
     buff, col, buff2 = st.columns([1, 3, 1])
 
@@ -76,7 +76,7 @@ with st.sidebar:
                 st.write("Your house's total potential energy harvested per year (in kWh/m^2), if you were to install solar panels:", potential_energy)
                 st.write('Money saving assumes 0.510€/kWh.')
 
-tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"])
+tab1, tab2 = st.tabs(["🗺️ Overview", "🏆 Champions"])
 
 with tab1:
     tab1.subheader("Solar Oppurtunities in Germany")
