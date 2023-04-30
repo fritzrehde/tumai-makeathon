@@ -37,7 +37,12 @@ with st.sidebar:
             'postcode': postcode
         }
 
-        response = requests.get(url, params=params)
+        try:
+            response = requests.get(url, params=params)
+            response.raise_for_status()  # raise an exception if the response status code is not OK (i.e., 200)
+        except requests.exceptions.RequestException as e:
+            print(f'Request failed: {e}')
+            st.write("Can't connect to server")
 
         if not response.ok:
             print(f'Request failed with status code {response.status_code}')
@@ -49,6 +54,7 @@ with st.sidebar:
             potential_energy = data['irradiance']
             latitude = data['roof_location_latitude']
             longitude = data['roof_location_longitude']
+            power = data['power']
 
             # Columns for layout purpose
             col1, col2, col3 = st.columns([1, 3, 1])
@@ -63,8 +69,10 @@ with st.sidebar:
             col1, col2, col3 = st.columns([1, 5, 1])
             with col2:
                 st.map(data)
+                st.write("City:", latitude)
                 st.write("Latitude:", latitude)
                 st.write("Longitude:", longitude)
+                st.write("Power (yearly) in kWh:", power)
                 st.write("Your house's total potential energy harvested per year (in kWh/m^2), if you were to install solar panels:", potential_energy)
                 st.write('Money saving assumes 0.510€/kWh.')
 
