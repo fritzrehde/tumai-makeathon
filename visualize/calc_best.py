@@ -9,7 +9,7 @@ def get_stuff():
     drop_cols = list(set(df.columns) - set(keep_cols))
     df = df.drop(drop_cols, axis=1)
 
-    df.head(100).to_csv('top_100.csv')
+    df.head(100).to_csv('visualize/top_100.csv')
 
     df = pd.read_csv('generated_data/bremen_test.csv')
 

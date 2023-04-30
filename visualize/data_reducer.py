@@ -100,7 +100,7 @@ def do_reducing():
 
     d = {'mean_longitude': long_list, 'mean_latitude': lat_list, 'mean_power': power_list}
     df_reduced = pd.DataFrame(data=d)
-    df_reduced.to_csv('reduced_data.csv')
+    df_reduced.to_csv('visualize/reduced_data.csv')
 
     heat_df = df_reduced.loc[:,["mean_latitude","mean_longitude","mean_power"]]
 
