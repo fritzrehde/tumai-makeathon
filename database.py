@@ -7,8 +7,8 @@ from energy_factors.buildings import get_df
 # db = TinyDB('database/tinydb.json')
 # table = db.table('buildings')
 
-# df = get_df();
-df = pd.read_csv('generated_data/bremen_test.csv')
+df = get_df();
+# df = pd.read_csv('generated_data/bremen_test.csv')
 # table.insert(df.to_dict())
 
 # Convert the DataFrame to a dictionary and insert it into the table
