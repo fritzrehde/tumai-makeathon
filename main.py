@@ -85,5 +85,13 @@ with tab1:
             "This will help to reduce greenhouse gas emissions, "
             "thereby contributing to a cleaner and more sustainable future.")
 
-tab2.subheader("A tab with the data")
-
+with tab2:
+    tab2.subheader("A tab with the data")
+    df_100 = pd.read_csv('visualize/top_100.csv')
+    keep_cols = ['addr:housenumber', 'addr:postcode', 'addr:street', 'roof_area',
+                'power', 'irradiance']
+    drop_cols = list(set(df_100.columns) - set(keep_cols))
+    df_100 = df_100.drop(drop_cols, axis=1)
+    column_order=['addr:street', 'addr:housenumber', 'addr:postcode', 'roof_area' 'irradiance', 'power']
+    df_100 = df_100.reindex(columns=column_order)
+    st.dataframe(df_100, 800, 400)
