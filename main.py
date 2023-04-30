@@ -8,6 +8,7 @@ import folium
 from folium.plugins import HeatMap
 import requests
 import pydeck as pdk
+import numpy as np
 
 # For area production heatmap
 df_reduced = pd.read_csv('visualize/reduced_data.csv')
@@ -98,35 +99,28 @@ with tab2:
     tab2.subheader("A tab with the data")
     df_100 = pd.read_csv('visualize/top_100.csv')
 
+    df_map = df_100[['roof_location_latitude', 'roof_location_longitude', 'power']]
+    df_map = df_map.rename(columns={'roof_location_latitude':'lat', 'roof_location_longitude':'lon', 'power':'weight'})
 
-    st.pydeck_chart(pdk.Deck(
-        map_style=None,
-        initial_view_state=pdk.ViewState(
-            latitude=37.76,
-            longitude=-122.4,
-            zoom=11,
-            pitch=50,
-        ),
-        layers=[
-            pdk.Layer(
-                'HexagonLayer',
-                data=df_100[['roof_location_latitude', 'roof_location_longitude']],
-                get_position='[lon, lat]',
-                radius=200,
-                elevation_scale=4,
-                elevation_range=[0, 1000],
-                pickable=True,
-                extruded=True,
-            ),
-            pdk.Layer(
-                'ScatterplotLayer',
-                data=df_100[['roof_location_latitude', 'roof_location_longitude']],
-                get_position='[lon, lat]',
-                get_color='[200, 30, 0, 160]',
-                get_radius=200,
-            ),
-        ],
-    ))
+    # create a Folium map
+    m = folium.Map(location=[51.509865, -0.118092], zoom_start=13)
+
+    # add a heatmap layer to the map
+    folium.plugins.HeatMap(
+        data=df_map[['lat', 'lon', 'weight']].values.tolist(),
+        name='Heat Map',
+        min_opacity=0.2,
+        max_val=float(df_map['weight'].max()),
+        radius=15,
+        blur=10,
+        max_zoom=1,
+    ).add_to(m)
+
+    # add a legend to the map
+    folium.LayerControl().add_to(m)
+
+    # display the map in Streamlit
+    st.markdown(m._repr_html_(), unsafe_allow_html=True)
 
     keep_cols = ['addr:housenumber', 'addr:postcode', 'addr:street', 'roof_area',
                  'power', 'irradiance']
