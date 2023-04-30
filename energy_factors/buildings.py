@@ -21,6 +21,7 @@ def get_df():
     # import .pbf buildings as df
     print('Debug: loading data from OSM')
     with fs.open('./paths/UI/2023-04-29_191451_UTC/germany-latest.osm.pb') as f:
+        print('Check: ' + str(fs.exists('./paths/UI/2023-04-29_191451_UTC/germany-latest.osm.pb')))
         # do some process
         osm = OSM(f)
     # osm = OSM(fs.open('./UI/2023-04-29_191451_UTC/germany-latest.osm.pbf'))
