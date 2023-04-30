@@ -1,7 +1,7 @@
 import pandas as pd
 
 def get_stuff():
-    df = pd.read_csv('../generated_data/bremen_test.csv')
+    df = pd.read_csv('generated_data/bremen_test.csv')
     df = df.sort_values(by=['power'])
 
     keep_cols = ['addr:housenumber', 'addr:postcode', 'addr:street', 'roof_area',
@@ -11,7 +11,7 @@ def get_stuff():
 
     df.head(100).to_csv('top_100.csv')
 
-    df = pd.read_csv('../generated_data/bremen_test.csv')
+    df = pd.read_csv('generated_data/bremen_test.csv')
 
     fossil = 292239900000  # kWh of power used in germany
     i = 0

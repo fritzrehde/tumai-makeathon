@@ -97,6 +97,7 @@ with tab1:
 
 with tab2:
     tab2.subheader("Highest potential Buildings and why it matters")
+    st.write('The following 100 houses offer the biggest energy yield if equipped with solar cells: ')
     df_100 = pd.read_csv('visualize/top_100.csv')
     df_100 = df_100.rename(columns={'roof_location_latitude': 'lat', 'roof_location_longitude': 'lon'})
     # df_map = df_100[['roof_location_latitude', 'roof_location_longitude', 'power']]
