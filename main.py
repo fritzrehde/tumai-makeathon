@@ -107,7 +107,7 @@ with tab2:
                  'power', 'irradiance']
     drop_cols = list(set(df_100.columns) - set(keep_cols))
     df_100 = df_100.drop(drop_cols, axis=1)
-    column_order = ['addr:street', 'addr:housenumber', 'addr:postcode', 'roof_area' 'irradiance', 'power']
+    column_order = ['addr:street', 'addr:housenumber', 'addr:postcode', 'roof_area', 'irradiance', 'power']
     df_100 = df_100.reindex(columns=column_order)
     st.dataframe(df_100, 800, 400)
 
