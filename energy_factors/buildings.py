@@ -22,7 +22,7 @@ def get_df():
     print('Debug: loading data from OSM')
     print('Check: ' + str(fs.exists('./paths/UI/2023-04-29_191451_UTC/germany-latest.osm.pb')))
     print(fs.ls())
-    with fs.open('./paths/UI/2023-04-29_191451_UTC/germany-latest.osm.pb') as f:
+    with fs.open('./UI/2023-04-29_191451_UTC/germany-latest.osm.pb') as f:
 
         # do some process
         osm = OSM(f)
