@@ -20,7 +20,7 @@ fs = AzureMachineLearningFileSystem('azureml://subscriptions/7972acb1-114d-41ac-
 def get_df():
     # import .pbf buildings as df
     print('Debug: loading data from OSM')
-    osm = OSM(fs.open('./germany-latest.osm.pbf'))
+    osm = OSM(fs.open('./UI/2023-04-29_191451_UTC/germany-latest.osm.pbf'))
     # osm = OSM('azureml://subscriptions/7972acb1-114d-41ac-b5c5-91d74b796b31/resourcegroups/paul.pucknus-rg/workspaces/makeathon/datastores/workspaceblobstore/paths/UI/2023-04-29_191451_UTC/germany-latest.osm.pbf')
     # osm = OSM('data/buildings/bremen.osm.pbf')
 
