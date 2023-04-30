@@ -43,7 +43,6 @@ with st.sidebar:
             response.raise_for_status()  # raise an exception if the response status code is not OK (i.e., 200)
         except requests.exceptions.RequestException as e:
             print(f'Request failed: {e}')
-            st.write("Can't connect to server")
 
         if not response.ok:
             print(f'Request failed with status code {response.status_code}')
