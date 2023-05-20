@@ -1,11 +1,32 @@
-# [TUM.ai](https://www.tum-ai.com) Makeathon 2023
+# [TUM.ai](https://www.tum-ai.com) Makeathon 2023: Solar Opposites
 
-![Demo screenshot](demo-screenshot.png)
+![Demo landing page](demo-landing-page.png)
+![Demo house address solar lookup](demo-house-address-solar-lookup.png)
 
-For this AI hackathon, we built a solar panel opportunity visualization platform, which is composed of a frontend website (made using [streamlit](https://streamlit.io/)), which displays information such as solar benefits for a specific user-provided house address, as well as an interactive map visualizing overall solar opportunities in an area, and a backend REST API (made using [Flask](https://flask.palletsprojects.com)) for the frontend to call to obtain the data for individual houses.
+Out of the five possible challenges, we chose to work on the "Solar Oppurtunities in Germany" project presented by [genistat](https://genistat.ch).
+
+For this AI hackathon, we built a solar panel opportunity visualization platform.
+Our system is composed of:
+- a frontend website (made using [streamlit](https://streamlit.io/)), which displays information such as solar benefits for a specific user-provided house address, as well as an interactive map visualizing overall solar opportunities in an area
+- a backend REST API (made using [Flask](https://flask.palletsprojects.com)) for the frontend to call to obtain the data for individual houses
+
+## Some links
+
+- PDF used for 5 minute pitch/presentation at the end of the event: [PDF](tumai-makeathon_team-x.pdf)
+- Devpost link to hackathon event page: [tum-ai-makeathon-2023.devpost.com](https://tum-ai-makeathon-2023.devpost.com/)
+- Devpost link to our project: [devpost.com/software/solar-opposites](https://devpost.com/software/solar-opposites)
+
+
+## How to run
+
+1. First, install all Python dependencies, specified in [`requirements.txt`](./requirements.txt), with `pip install -r requirements.txt`.
+2. Run the backend with `python database.py`. This will take a while, as we had to improvise and use panda dataframes as our "database", since we couldn't get [TinyDB](https://tinydb.readthedocs.io) to work in time (when we tried to use it, all API requests returned nothing for some reason).
+3. Run the frontend with `streamlit run main.py`.
+
 
 ## The challenge
-Out of the five possible challenges, we chose to work on the Solar Oppurtunities in Germany project presented by [genistat](https://genistat.ch).
+
+*This following contains all of the information regarding the challenge that we received from the challenge setting company, genistat:*
 
 **The future of energy is green!**
 
@@ -39,12 +60,3 @@ The extra mile:
 
 Different datasets, implementation hints that could be useful for your solution:
 [https://github.com/polygon-software/tum.ai-solar](https://github.com/polygon-software/tum.ai-solar)
-
-
-## How to run
-
-<!-- Our system is split into a frontend website (made using [streamlit](https://streamlit.io/)) and a backend REST API (made using [Flask](https://flask.palletsprojects.com)). -->
-
-1. First, install all Python dependencies, specified in [`requirements.txt`](./requirements.txt), with `pip install -r requirements.txt`.
-2. Run the backend with `python database.py`. This will take a while, as we had to improvise and use panda dataframes as our "database", since we couldn't get [TinyDB](https://tinydb.readthedocs.io) to work in time (when we tried to use it, all API requests returned nothing for some reason).
-3. Run the frontend with `streamlit run main.py`.
