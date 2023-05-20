@@ -1,7 +1,7 @@
 # [TUM.ai](https://www.tum-ai.com) Makeathon 2023: Solar Opposites
 
-![Demo landing page](demo-landing-page.png)
-![Demo house address solar lookup](demo-house-address-solar-lookup.png)
+![Demo landing page](.github/demo-landing-page.png)
+![Demo house address solar lookup](.github/demo-house-address-solar-lookup.png)
 
 Out of five possible challenges at this event, we chose to work on the "Solar Oppurtunities in Germany" project presented by [genistat](https://genistat.ch).
 
@@ -12,7 +12,7 @@ Our system is composed of:
 
 ## Some links
 
-- PDF used for our 5 minute pitch/presentation at the end of the event: [tumai-makeathon_team-x.pdf](tumai-makeathon_team-x.pdf)
+- PDF used for our 5 minute pitch/presentation at the end of the event: [tumai-makeathon_team-x.pdf](.github/tumai-makeathon_team-x.pdf)
 - Devpost link to hackathon event page: [tum-ai-makeathon-2023.devpost.com](https://tum-ai-makeathon-2023.devpost.com/)
 - Devpost link to our project: [devpost.com/software/solar-opposites](https://devpost.com/software/solar-opposites)
 
