@@ -12,7 +12,7 @@ Our system is composed of:
 
 ## Some links
 
-- PDF used for 5 minute pitch/presentation at the end of the event: [tumai-makeathon_team-x.pdf](tumai-makeathon_team-x.pdf)
+- PDF used for our 5 minute pitch/presentation at the end of the event: [tumai-makeathon_team-x.pdf](tumai-makeathon_team-x.pdf)
 - Devpost link to hackathon event page: [tum-ai-makeathon-2023.devpost.com](https://tum-ai-makeathon-2023.devpost.com/)
 - Devpost link to our project: [devpost.com/software/solar-opposites](https://devpost.com/software/solar-opposites)
 
@@ -26,7 +26,7 @@ Our system is composed of:
 
 ## Details on the challenge
 
-*This following contains all of the information regarding the challenge that we received from the challenge setting company, genistat:*
+*This following contains all of the information regarding the challenge that we received from the challenge-setting company, genistat:*
 
 **The future of energy is green!**
 
